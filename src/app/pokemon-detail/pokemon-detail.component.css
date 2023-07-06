@@ -1,0 +1,101 @@
+.pokemon-detail-page {
+    padding: 20px 6%;
+}
+
+.img-centered {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.img-centered img {
+    position:absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 90%;
+}
+
+.namedesc {
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+.progress {
+    height: 27px;
+    border-radius: 0;
+}
+
+.profile ul {
+    list-style:none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile ul li {
+    display: flex;
+}
+
+.profile-lists {
+    padding: 20px 1% 6px;
+}
+
+.list-block {
+    display: inline-block;
+    width: auto;
+}
+
+.list {
+    display: table;
+}
+
+.list-row {
+    display: table-row;
+    height: 35px;
+}
+
+.list-left,
+.list-right {
+    display: table-cell;
+    padding-right: 15px;
+}
+
+.list-left {
+    font-weight: bold;
+}
+
+.evolution-list {
+    padding: 0 10%;
+    margin: 0 auto;
+}
+
+.evolution-item {
+    padding: 60px 0 0;
+}
+
+.dwa-item {
+    max-width: 200px;
+}
+
+.arrow {
+	position: relative;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.arrow:after {
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-left-color: inherit;
+    border-width: 30px;
+    margin-top: -30px;
+}

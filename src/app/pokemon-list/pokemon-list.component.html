@@ -1,0 +1,31 @@
+<div *ngIf="loader">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.2.3/jquery.min.js"></script>
+  <div class="center-loader">
+    <strong>Loading
+    <span class="loader__dot">.</span>
+    <span class="loader__dot">.</span>
+    <span class="loader__dot">.</span></strong>
+  </div>
+</div>
+<div class="pokemon-list">
+  <div class="container-fluid">
+    <div class="row gx-5">
+      <div class="col-md-3" (click)="onSelect(pokemon)" *ngFor="let pokemon of pokemons">
+        <div class="card-wrapper">
+          <div class="card border-secondary">
+            <div class="card-image">
+              <img class="card-img-top" src="http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{pokemon.id}}.png" fallback="https://via.placeholder.com/150">
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{ pokemon.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row gx-5">
+      <app-pagination [currentPage]="currentPage" [lastPage]="lastPage"  (pageChangedEvent)="getPokemons($event)"></app-pagination>
+    </div>
+  </div>
+</div>
+

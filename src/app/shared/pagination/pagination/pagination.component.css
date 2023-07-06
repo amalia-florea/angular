@@ -1,0 +1,8 @@
+.page-item {
+    margin-left: 10px;
+}
+
+.page-item .page-link {
+    cursor: pointer;
+    border-radius: 0;
+}

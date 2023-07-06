@@ -1,0 +1,43 @@
+form {
+    padding: 0 5%;
+}
+
+label {
+    color: blue;
+}
+
+.form-control {
+    border: none;
+    border-bottom: 3px solid lightblue;
+    border-radius: 0;
+    padding-left: 0;
+}
+
+select {
+    margin-top: 19px;
+    padding: 9px;
+    border: none;
+    border-bottom: 3px solid #ddd;
+    padding-left: 0;
+}
+
+.category-select select {
+    width: 100%;
+}
+
+
+.phone-wrapper {
+    width: calc(100% - 130px);
+}
+
+::placeholder {
+    color: #000;
+}
+
+.addnew-button  {
+    margin: 60px 0 100px
+}
+
+.newDinamicProduct-wrapper {
+    margin-top: 70px;
+}

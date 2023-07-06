@@ -1,0 +1,207 @@
+<div class="pokemon-detail-page">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="d-flex justify-content-center p-3" [style.background-color]="pokemonSpecies?.color">
+            <h2 class="text-white">{{ pokemon?.name | titlecase }}</h2>
+         </div>
+      </div>      
+
+      <div class="row my-3">
+         <div class="col">
+            <div class="img-centered g-4 d-flex align-self-center">
+               <img *ngIf="pokemon?.id" src="http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon?.id }}.png" fallback="https://via.placeholder.com/150" />
+            </div>
+         </div>
+
+         <div class="col-6">
+            <div class="row my-3">
+               <div class="col-md-auto gx-2" *ngFor="let type of pokemon?.types">
+                  <div class="d-flex justify-content-center text-white fw-bold p-2" [style.background-color]="typeColorList[type]">{{ type | uppercase }}</div>
+               </div>
+            </div>
+
+            <div class="row row-cols-2">
+               <div class="col gx-2 gy-2">HP</div>
+               <div class="col gx-2 gy-2"> 
+                  <div class="progress">
+                     <div [style.background-color]="pokemonSpecies?.color" class="progress-bar" role="progressbar" 
+                        [style.width.%]="pokemon?.hp" [attr.aria-valuenow]="pokemon?.hp" aria-valuemin="0" aria-valuemax="100">{{ pokemon?.hp }}</div>
+                  </div>
+               </div>   
+               <div class="col gx-2 gy-2">Attack</div> 
+               <div class="col gx-2 gy-2">
+                  <div class="progress">
+                     <div [style.background-color]="pokemonSpecies?.color" class="progress-bar" role="progressbar" 
+                        [style.width.%]="pokemon?.attack" [attr.aria-valuenow]="pokemon?.attack" aria-valuemin="0" aria-valuemax="100">{{ pokemon?.attack }}</div>
+                  </div>  
+               </div>
+               <div class="col gx-2 gy-2">Defence</div> 
+               <div class="col gx-2 gy-2">
+                  <div class="progress">
+                     <div [style.background-color]="pokemonSpecies?.color" class="progress-bar" role="progressbar" 
+                        [style.width.%]="pokemon?.defence" [attr.aria-valuenow]="pokemon?.defence" aria-valuemin="0" aria-valuemax="100">{{ pokemon?.defence }}</div>
+                  </div>  
+               </div>
+               <div class="col gx-2 gy-2">Speed</div>
+               <div class="col gx-2 gy-2">
+                  <div class="progress">
+                     <div [style.background-color]="pokemonSpecies?.color" class="progress-bar" role="progressbar" 
+                        [style.width.%]="pokemon?.speed" [attr.aria-valuenow]="pokemon?.speed" aria-valuemin="0" aria-valuemax="100">{{ pokemon?.speed }}</div>
+                  </div> 
+               </div>
+               <div class="col gx-2 gy-2">Sp Atk</div>
+               <div class="col gx-2 gy-2">
+                  <div class="progress">
+                     <div [style.background-color]="pokemonSpecies?.color" class="progress-bar" role="progressbar" 
+                        [style.width.%]="pokemon?.special_attack" [attr.aria-valuenow]="pokemon?.special_attack" aria-valuemin="0" aria-valuemax="100">{{ pokemon?.special_attack }}</div>
+                  </div>  
+               </div>
+               <div class="col gx-2 gy-2">Sp Def</div>
+               <div class="col gx-2 gy-2">
+                  <div class="progress">
+                     <div [style.background-color]="pokemonSpecies?.color"class="progress-bar" role="progressbar" 
+                        [style.width.%]="pokemon?.special_defence" [attr.aria-valuenow]="pokemon?.special_defence" aria-valuemin="0" aria-valuemax="100">{{ pokemon?.special_defence }}</div>
+                  </div> 
+               </div>
+            </div>
+         </div>
+
+         <div class="col text-center fs-1">
+            #{{ pokemon?.id }}
+         </div>
+      </div>
+
+      <div class="row my-3">
+         <div class="namedesc">
+            <h6 class="fw-bold">{{ pokemonSpecies?.name }}</h6>
+            <p>{{ pokemonSpecies?.description }}</p>
+         </div>
+      </div>
+
+      <div class="profile my-3">
+         <div class="row">
+            <h4 [style.background-color]="pokemonSpecies?.color" class="text-white p-2">Profile</h4>
+         </div>
+         <div class="profile-lists">
+            <div class="row">
+               <div class="list-block">
+                  <div class="list">
+                     <div class="list-row">
+                        <div class="list-left">
+                           Height:
+                        </div>
+                        <div class="list-right">
+                           {{ pokemon?.height }} m
+                        </div>
+                     </div>
+                     <div class="list-row">
+                        <div class="list-left">
+                           Catch Rate: 
+                        </div>
+                        <div class="list-right">
+                           {{ pokemonSpecies?.catch_rate }}%
+                        </div>   
+                     </div>
+                     <div class="list-row">
+                        <div class="list-left">
+                           Egg Groups:
+                        </div>
+                        <div class="list-right">
+                           <span *ngFor="let eggGroup of pokemonSpecies?.egg_groups; let i = index">{{ eggGroup | titlecase }}{{i === pokemonSpecies!.egg_groups.length - 1 ? '' : ',&nbsp;' }}</span>
+                        </div>
+                     </div>
+                     <div class="list-row">
+                        <div class="list-left">
+                           Abilities:
+                        </div>
+                        <div class="list-right">
+                           <span *ngFor="let ability of pokemon?.abilities; let i = index">{{ ability | titlecase }}{{i === pokemon!.abilities.length - 1 ? '' : ',&nbsp;' }}</span>
+                        </div>
+                     </div>
+                  </div>   
+               </div>
+               <div class="list-block">
+                  <div class="list">
+                     <div class="list-row">
+                        <div class="list-left">
+                           Weight:
+                        </div>
+                        <div class="list-right">
+                           {{ pokemon?.weight }} kg
+                        </div>
+                     </div>
+                     <div class="list-row">
+                        <div class="list-left">
+                           Gender Ratio: 
+                        </div>
+                        <div class="list-right">
+                           {{ pokemonSpecies?.gender_rate }}
+                        </div>
+                     </div>
+                     <div class="list-row">
+                        <div class="list-left">
+                           Hatch Steps:
+                        </div>
+                        <div class="list-right">
+                           {{ pokemonSpecies?.hatch_steps }}
+                        </div>
+                     </div>
+                     <div class="list-row">
+                        <div class="list-left">
+                           EVs: 
+                        </div>
+                        <div class="list-right">
+                           {{ pokemonEvolution?.length }} Sp Att
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="evolution my-3">
+         <div class="row">
+            <h4 [style.background-color]="pokemonSpecies?.color" class="text-white p-2">Evolutions</h4>
+         </div>
+         <div class="evolution-list text-center" *ngFor="let evolution of pokemonEvolution">
+            <div class="evolution-item">
+               <div class="row row-cols-3">
+                  <div class="col">
+                     <img *ngIf="pokemon?.id" src="http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ pokemon?.id }}.png" fallback="https://via.placeholder.com/150" />
+                  </div>
+                  <div class="col">
+                     <div class="arrow" [style.background-color]="pokemonSpecies?.color" [style.border-color]="pokemonSpecies?.color"></div>
+                  </div>
+                  <div class="col">
+                     <img *ngIf="evolution?.evolvesTo" src="http://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{ evolution?.evolvesTo }}.png" fallback="https://via.placeholder.com/150" />
+                  </div>
+               </div>
+               <div class="row my-5">
+                  <p>
+                     {{ pokemon?.name | titlecase }} evolves into {{ evolution.name | titlecase }} <span class="fw-bold"> at level {{ evolution.level }}</span>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>   
+
+      <div class="dwa-wrapper p-2 my-3">
+         <div class="row">
+            <h4 [style.background]="pokemonSpecies?.color" class="text-white p-2">Damage When Attacked</h4>
+         </div>
+         <div class="dwa-list my-4">
+            <div class="row row-cols-2">
+               <div class="col">
+                  <div *ngFor="let damage of damageWhenAttacked  | slice:0:damageFirstColumnEnd" class="dwa-item text-white fw-bold p-2 my-1" [style.background-color]="typeColorList[damage]">{{ damage | uppercase }}</div>
+
+               </div>
+               <div class="col">
+                  <div *ngFor="let damage of damageWhenAttacked  | slice:damageFirstColumnEnd:damageSecondColumnEnd" class="dwa-item text-white fw-bold p-2 my-1" [style.background-color]="typeColorList[damage]">{{ damage | uppercase }}</div>
+
+               </div>
+            </div>
+         </div>      
+      </div>  
+   </div>        
+</div>

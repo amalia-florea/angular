@@ -1,0 +1,190 @@
+<form *ngIf="!submitted" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="container-fluid my-5">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label>Name</label>
+          <input [class.is-invalid]="name.invalid && name.touched" formControlName="name" placeholder="Pokemon Name" type="text" class="form-control">
+    
+          <div *ngIf="name.invalid && name.touched">                  
+              <small *ngIf="name.errors?.['required']" class="text-danger">Name is required</small>
+              <small *ngIf="name.errors?.['minlength']" class="text-danger">Name must be at least 3 characters</small>
+              <small *ngIf="name.errors?.['forbiddenName']" class="text-danger">{{ name.errors!['forbiddenName'].value }} Name not allowed</small>
+          </div>                                   
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label>Description</label>
+          <input [class.is-invalid]="description.invalid && description.touched" formControlName="description" placeholder="Product Description" type="text" class="form-control">
+    
+          <div *ngIf="description.invalid && description.touched">                   
+              <small *ngIf="description.errors?.['required']" class="text-danger">Description is required</small>
+              <small *ngIf="description.errors?.['minlength']" class="text-danger">Description must be at least 3 characters</small>
+              <small *ngIf="description.errors?.['forbiddenName']" class="text-danger">{{ description.errors!['forbiddenName'].value }} Description not allowed</small>
+          </div>                                   
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label>Price</label>
+          <input [class.is-invalid]="price.invalid && price.touched" formControlName="price" placeholder="10.00$" type="number" step ="0.01" class="form-control">
+    
+          <div *ngIf="price.invalid && price.touched">                
+              <small *ngIf="price.errors?.['required']" class="text-danger">Price is required</small>
+              <small *ngIf="price.errors?.['forbiddenName']" class="text-danger">{{ price.errors!['forbiddenName'].value }} Price not allowed</small>
+          </div>                                   
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="category-select mb-3">
+          <select [class.is-invalid]="category.invalid && category.touched" formControlName="category" class="custom-select">
+            <option value="">Category</option>
+            <option *ngFor="let category of categories">{{ category }}</option>
+          </select>
+  
+          <div *ngIf="category.invalid && category.touched">                
+              <small *ngIf="category.errors?.['required']" class="text-danger">Category is required</small>
+          </div> 
+        </div>  
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label>Image URL</label>
+          <input [class.is-invalid]="imageURL.invalid && imageURL.touched" formControlName="imageURL" placeholder="https://imageURL" type="text" class="form-control">
+    
+          <div *ngIf="imageURL.invalid && imageURL.touched">                   
+              <small *ngIf="imageURL.errors?.['required']" class="text-danger">Image URL is required</small>
+              <small *ngIf="imageURL.errors?.['forbiddenName']" class="text-danger">{{ imageURL.errors!['forbiddenName'].value }} Image URL not allowed</small>
+          </div>                                   
+        </div>
+      </div>
+      <div class="col">
+        <div class="d-flex justify-content-between">
+          <div class="phone-wrapper mb-3">
+            <label>&nbsp;</label>
+            <input type="number" [class.is-invalid]="phone.invalid && phone.touched" formControlName="phone" placeholder="Phone" class="form-control">
+    
+            <div *ngIf="phone.errors && (phone.valid || phone.touched)">
+                <small *ngIf="phone.errors?.['required']" class="text-danger">Phone is required</small>
+                <small *ngIf="phone.errors?.['forbiddenName']" class="text-danger">{{ phone.errors!['forbiddenName'].value }} Phione number not allowed</small>
+                <small *ngIf="phone.errors?.['maxlength']" class="text-danger">Phone number must be maximum 10 digits</small>
+            </div>
+          </div>         
+      
+          <div class="mb-3">
+            <label>&nbsp;</label>
+            <select formControlName="phoneType" class="custom-select">
+              <option value="">Select</option>
+              <option *ngFor="let phoneType of phoneTypes">{{ phoneType }}</option>
+            </select>
+          </div>     
+        </div>
+      </div>
+    </div>
+
+
+    <div class="newDinamicProduct-wrapper" formArrayName="newProducts" *ngFor="let product of newProducts.controls; let i=index">
+      <div [formGroupName]="i">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label>Name</label>
+              <input [class.is-invalid]="product.get('name')!.invalid && product.get('name')!.touched" formControlName="name" placeholder="Name" type="text" class="form-control">
+        
+              <div *ngIf="product.get('name')!.invalid && product.get('name')!.touched">                    
+                  <small *ngIf="product.get('name')!.errors?.['required']" class="text-danger">Name is required</small>
+                  <small *ngIf="product.get('name')!.errors?.['minlength']" class="text-danger">Name must be at least 3 characters</small>
+                  <small *ngIf="product.get('name')!.errors?.['forbiddenName']" class="text-danger">{{ product.get('name')!.errors!['forbiddenName'].value }} Name not allowed</small>
+              </div>                                   
+            </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label>Description</label>
+              <input [class.is-invalid]="product.get('description')!.invalid && product.get('description')!.touched" formControlName="description" placeholder="Description" type="text" class="form-control">
+        
+              <div *ngIf="product.get('description')!.invalid && product.get('description')!.touched">                   
+                  <small *ngIf="product.get('description')!.errors?.['required']" class="text-danger">Description is required</small>
+                  <small *ngIf="product.get('description')!.errors?.['minlength']" class="text-danger">Description must be at least 3 characters</small>
+                  <small *ngIf="product.get('description')!.errors?.['forbiddenName']" class="text-danger">{{ product.get('description')!.errors!['forbiddenName'].value }} Description not allowed</small>
+              </div>                                   
+            </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label>Price</label>
+              <input [class.is-invalid]="product.get('price')!.invalid && product.get('price')!.touched" formControlName="price" placeholder="10.00$" type="number" step ="0.01" class="form-control">
+        
+              <div *ngIf="product.get('price')!.invalid && product.get('price')!.touched">                
+                  <small *ngIf="product.get('price')!.errors?.['required']" class="text-danger">Price is required</small>
+                  <small *ngIf="product.get('price')!.errors?.['forbiddenName']" class="text-danger">{{ product.get('price')!.errors!['forbiddenName'].value }} Price not allowed</small>
+              </div>                                   
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="category-select mb-3">
+              <select [class.is-invalid]="product.get('category')!.invalid && product.get('category')!.touched" formControlName="category" class="custom-select">
+                <option value="">Category</option>
+                <option *ngFor="let category of categories">{{ category }}</option>
+              </select>
+    
+              <div *ngIf="product.get('category')!.invalid && product.get('category')!.touched">                
+                  <small *ngIf="product.get('category')!.errors?.['required']" class="text-danger">Category is required</small>
+              </div> 
+            </div>    
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label>Image URL</label>
+              <input [class.is-invalid]="product.get('imageURL')!.invalid && product.get('imageURL')!.touched" formControlName="imageURL" placeholder="https://imageURL" type="text" class="form-control">
+        
+              <div *ngIf="product.get('imageURL')!.invalid && product.get('imageURL')!.touched">                   
+                  <small *ngIf="product.get('imageURL')!.errors?.['required']" class="text-danger">Image URL is required</small>
+                  <small *ngIf="product.get('imageURL')!.errors?.['forbiddenName']" class="text-danger">{{ product.get('imageURL')!.errors!['forbiddenName'].value }} Image URL not allowed</small>
+              </div>                                   
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-flex justify-content-between">
+              <div class="phone-wrapper mb-3">
+                <label>&nbsp;</label>
+                <input type="number" [class.is-invalid]="product.get('phone')!.invalid && product.get('phone')!.touched" formControlName="phone" placeholder="Phone" class="form-control">
+                
+                <div *ngIf="product.get('phone')!.errors && (product.get('phone')!.valid || product.get('phone')!.touched)">
+                    <small *ngIf="product.get('phone')!.errors?.['required']" class="text-danger">Phone is required</small>
+                    <small *ngIf="product.get('phone')!.errors?.['forbiddenName']" class="text-danger">{{ product.get('phone')!.errors!['forbiddenName'].value }} Phione number not allowed</small>
+                    <small *ngIf="product.get('phone')!.errors?.['maxlength']" class="text-danger">Phone number must be maximum 10 digits</small>
+                </div>
+              </div>  
+              <div class="mb-3">
+                <label>&nbsp;</label>
+                <select formControlName="phoneType" class="custom-select">
+                  <option value="">Select</option>
+                  <option *ngFor="let phoneType of phoneTypes">{{ phoneType }}</option>
+                </select>
+              </div> 
+            </div>   
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="addnew-button d-flex justify-content-end">
+        <button [disabled]="!canAddNewProduct" type="button" class="btn btn-secondary btn-sm ms-2" (click)="addNewProduct()">Add New Product</button>
+      </div>
+      <div class="form-buttons d-flex justify-content-end">
+        <button type="reset" class="btn btn-secondary btn-sm">Reset</button>
+        <button [disabled]="!productForm.valid" type="submit" class="btn btn-primary ms-4">Save</button>
+      </div>
+    </div>    
+  </div>
+</form> 
+  
